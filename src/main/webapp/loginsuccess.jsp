@@ -61,7 +61,7 @@
 	    <h1>Seja Bem-vindo</h1>
 	    
 	    <!-- Botão para adicionar usuários -->
-	    <a href="http://localhost:8082/login-jsp-servlet-jdbc/cadastro-user.jsp" class="btn btn-primary">Cadastrar Usuários</a>
+	    <a href="http://localhost:8082/login-jsp-servlet-jdbc/cadastro-form.jsp" class="btn btn-primary">Cadastrar Usuários</a>
 	    
 	    <!-- Formulário para cadastrar produtos -->
 	    <!-- Link para cadastrar produtos -->

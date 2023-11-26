@@ -1,27 +1,27 @@
-package net.javaguides.cadastro.bean;
+package net.javaguides.login.bean;
 
-public class ProdutoBean {
+public class UsuarioBean {
 	protected int id;
 	protected String name;
 	protected String email;
-	protected String fornecedor;
+	protected String country;
 	
-	public ProdutoBean() {
+	public UsuarioBean() {
 	}
 	
-	public ProdutoBean(String name, String email, String fornecedor) {
+	public UsuarioBean(String name, String email, String country) {
 		super();
 		this.name = name;
 		this.email = email;
-		this.fornecedor = fornecedor;
+		this.country = country;
 	}
 
-	public ProdutoBean(int id, String name, String email, String country) {
+	public UsuarioBean(int id, String name, String email, String country) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
-		this.fornecedor = fornecedor;
+		this.country = country;
 	}
 
 	public int getId() {
@@ -42,10 +42,11 @@ public class ProdutoBean {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getFornecedor() {
-		return fornecedor;
+	public String getCountry() {
+		return country;
 	}
-	public void setFornecedor(String fornecedor) {
-		this.fornecedor =fornecedor;
+	public void setCountry(String country) {
+		this.country = country;
 	}
+
 }

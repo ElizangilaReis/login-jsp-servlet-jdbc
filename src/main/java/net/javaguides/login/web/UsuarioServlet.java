@@ -1,4 +1,4 @@
-package net.javaguides.cadastro.web;
+package net.javaguides.login.web;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,19 +11,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.javaguides.cadastro.bean.ProdutoBean;
-import net.javaguides.cadastro.database.ProdutoDao;
+import net.javaguides.login.bean.UsuarioBean;
+import net.javaguides.login.database.UsuarioDao;
 
-
+/**
+ * ControllerServlet.java
+ * This servlet acts as a page controller for the application, handling all
+ * requests from the user.
+ * @email Ramesh Fadatare
+ */
 
 @WebServlet("/")
-public class ProdutoServlet extends HttpServlet {
+public class UsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ProdutoDao produtoDao;
+	private UsuarioDao userDAO;
 	
 	
 	public void init() {
-		produtoDao = new ProdutoDao();
+		userDAO = new UsuarioDao();
 		//System.out.println(userDAO);
 	}
 
@@ -52,7 +57,7 @@ public class ProdutoServlet extends HttpServlet {
 				updateUser(request, response);
 				break;
 			default:
-				listProduto(request, response);
+				listUser(request, response);
 				break;
 			}
 		} catch (SQLException ex) {
@@ -60,23 +65,23 @@ public class ProdutoServlet extends HttpServlet {
 		}
 	}
 
-	private void listProduto(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-		List<ProdutoBean> listUser = produtoDao.selectAllProdutos();
+	private void listUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+		List<UsuarioBean> listUser = userDAO.selectAllUsers();
 		request.setAttribute("listUser", listUser);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("produto-list.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cdastro-list.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("produto-form.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-form.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		ProdutoBean existingProduto = produtoDao.selectProduto(id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("produto-form.jsp");
-		request.setAttribute("produto", existingProduto);
+		UsuarioBean existingUser = userDAO.selectUser(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
+		request.setAttribute("user", existingUser);
 		dispatcher.forward(request, response);
 
 	}
@@ -84,10 +89,10 @@ public class ProdutoServlet extends HttpServlet {
 	private void insertUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
-		String fornecedor = request.getParameter("fornecedor");
+		String country = request.getParameter("country");
 		
-		ProdutoBean newProduto = new ProdutoBean(name, email, fornecedor);
-		produtoDao.insertProduto(newProduto);
+		UsuarioBean newUser = new UsuarioBean(name, email, country);
+		userDAO.insertUser(newUser);
 		response.sendRedirect("list");
 	}
 
@@ -95,16 +100,16 @@ public class ProdutoServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
-		String fornecedor = request.getParameter("fornecedor");
+		String country = request.getParameter("country");
 
-		ProdutoBean book = new ProdutoBean(id, name, email, fornecedor);
-		produtoDao.updateProduto(book);
+		UsuarioBean book = new UsuarioBean(id, name, email, country);
+		userDAO.updateUser(book);
 		response.sendRedirect("list");
 	}
 
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		produtoDao.deleteProduto(id);
+		userDAO.deleteUser(id);
 		response.sendRedirect("list");
 
 	}

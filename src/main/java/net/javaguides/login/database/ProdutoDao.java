@@ -1,4 +1,4 @@
-package net.javaguides.cadastro.database;
+package net.javaguides.login.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.javaguides.cadastro.bean.ProdutoBean;
+import net.javaguides.login.bean.ProdutoBean;
 
 /**
  * AbstractDAO.java This DAO class provides CRUD database operations for the

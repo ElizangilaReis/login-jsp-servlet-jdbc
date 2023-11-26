@@ -56,28 +56,47 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div align="center" class="container col-md-5">
-		<h1>Cadastro de Novo Usuário</h1>
-	    <form action="/login-jsp-servlet-jdbc/CadastroUsuarioServlet" method="post">
-	        <label for="username">Username:</label>
-	        <input type="text" id="username" name="username" required><br><br>
-	         
-	        <label for="password">Password:</label>
-	        <input type="password" id="password" name="password" required><br><br>
-	        
-	        <input type="submit" value="Cadastrar">
-	    </form>
-	    <div align="center">
-	        <p>Já tem uma conta? <a href="login.jsp">Faça login aqui</a>.</p>
-	    </div>
-	    <div align="center">
-	    <p>
-	        <% String successMessage = (String) session.getAttribute("successMessage");
-	        if (successMessage != null) { %>
-	            <span style="color: green;"><%= successMessage %></span>
-	        <% } %>
-	    </p>
-</div>
-	 </div>
+	<div class="row">
+		<!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
+
+		<div class="container">
+			<h3 class="text-center">Lista de Clientes</h3>
+			<hr>
+			<div class="container text-left">
+
+				<a href="<%=request.getContextPath()%>/new" class="btn btn-success">Adicionar
+					Novo Cliente</a>
+			</div>
+			<br>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>País</th>
+						<th>Acções</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!--   for (Todo todo: todos) {  -->
+					<c:forEach var="user" items="${listUser}">
+
+						<tr>
+							<td><c:out value="${user.id}" /></td>
+							<td><c:out value="${user.name}" /></td>
+							<td><c:out value="${user.email}" /></td>
+							<td><c:out value="${user.country}" /></td>
+							<td><a href="edit?id=<c:out value='${user.id}' />">Edit</a>
+								&nbsp;&nbsp;&nbsp;&nbsp; <a
+								href="delete?id=<c:out value='${user.id}' />">Delete</a></td>
+						</tr>
+					</c:forEach>
+					<!-- } -->
+				</tbody>
+
+			</table>
+		</div>
+	</div>
 </body>
 </html>
